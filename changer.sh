@@ -7,7 +7,7 @@ Approach:
 > Start with the easy stuff [done]
 > Throw it all together [done]
 > Do extra credit archiving if ur not dead yet [not even started]
-> Oh and write the readmeh [not even started]
+> Oh and write the readmeh [done]
 > Add proper logging maybe who knows [not even started]
 > Add a final validation check at the end if ur real feeling nice [not even started]
 '
