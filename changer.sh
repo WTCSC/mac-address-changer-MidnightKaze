@@ -1,10 +1,5 @@
 #!/bin/bash
 
-: '
-Approach:
-> Do extra credit archiving if ur not dead yet [wip]
-'
-
 archive_file="archive.txt"
 
 archiving_mac() {
@@ -15,10 +10,10 @@ archiving_mac() {
 
     # Will create the archive file defined above if one does not already exist.
     if [[ ! -f "$archive_file" ]]; then
-        touch "$archive_file"
+        echo -e "Welcome to the MAC Archives!" >> "$archive_file"
     fi
 
-    echo "[$time]" >> "$archive_file"
+    echo -e "\n[$time]" >> "$archive_file"
     echo "Interface: $interface" >> "$archive_file"
     echo "Old MAC Address: $og_mac" >> "$archive_file"
     echo "New MAC Address: $new_mac" >> "$archive_file"
@@ -56,7 +51,8 @@ interface="$1"
 new_mac="$2"
 
 # Uses grep to pull out the original MAC address following the same regular expression search from the validation check.
-old_mac=$(ip link show "$interface" | grep -o -E '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}')
+# head -n 1 will only match the first enoucter of a match, which will avoid the archive becoming cluttered with the brd addresses.
+old_mac=$(ip link show "$interface" | grep -o -E '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}' | head -n 1)
 
 # Interface validation
 if ! interface_validation "$interface"; then
@@ -81,7 +77,7 @@ fi
 if ! ip link set "$interface" address "$new_mac"; then
     echo "Failed to change the MAC address."
     
-    # If it happens to fail, it will be nice and try to bring the interface back up anyway
+    # If it happens to fail, it will be nice and try to bring the interface back up.
     ip link set "$interface" up
     exit 1
 fi
@@ -94,6 +90,6 @@ fi
 
 # Returns some validation for the user to tell them that the change process is completed.
 echo "Changed your MAC address ✧( ˶^ ᗜ ^˶ )"
-echo "Run ip link show to see the changes made (there might be a little bit of delay)."
+echo "Run ip link show to see the changes made (there might be a little bit of delay or lag)."
 
 exit 0
