@@ -15,8 +15,8 @@ archiving_mac() {
 
     echo -e "\n[$time]" >> "$archive_file"
     echo "Interface: $interface" >> "$archive_file"
-    echo "Old MAC Address: $og_mac" >> "$archive_file"
-    echo "New MAC Address: $new_mac" >> "$archive_file"
+    echo "Your old MAC address: $og_mac" >> "$archive_file"
+    echo "Your MAC address was changed to: $new_mac" >> "$archive_file"
 }
 
 # Check that user gave a real MAC address
@@ -91,5 +91,6 @@ fi
 # Returns some validation for the user to tell them that the change process is completed.
 echo "Changed your MAC address ✧( ˶^ ᗜ ^˶ )"
 echo "Run ip link show to see the changes made (there might be a little bit of delay or lag)."
+echo "Your old IP address was archived in archive.txt. Run cat archive.txt to view it."
 
 exit 0
