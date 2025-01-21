@@ -3,8 +3,6 @@
 : '
 Approach:
 > Do extra credit archiving if ur not dead yet [wip]
-> Add proper logging maybe who knows [yea no]
-> Add a final validation check at the end if ur real feeling nice [yea no]
 '
 
 archive_file="archive.txt"
