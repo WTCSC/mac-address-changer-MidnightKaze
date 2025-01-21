@@ -2,20 +2,35 @@
 
 : '
 Approach:
-> Build everything bit by bit [basically done]
-> Integrate the error + logging messages to save the pain [done]
-> Start with the easy stuff [done]
-> Throw it all together [done]
-> Do extra credit archiving if ur not dead yet [not even started]
-> Oh and write the readmeh [done]
-> Add proper logging maybe who knows [not even started]
-> Add a final validation check at the end if ur real feeling nice [not even started]
+> Do extra credit archiving if ur not dead yet [wip]
+> Add proper logging maybe who knows [yea no]
+> Add a final validation check at the end if ur real feeling nice [yea no]
 '
+
+archive_file="archive.txt"
+
+archiving_mac() {
+    local interface=$1
+    local og_mac=$2
+    local new_mac=$3
+    local time=$(date '+%Y-%m-%d %H:%M:%S')
+
+    # Will create the archive file defined above if one does not already exist.
+    if [[ ! -f "$archive_file" ]]; then
+        touch "$archive_file"
+    fi
+
+    echo "[$time]" >> "$archive_file"
+    echo "Interface: $interface" >> "$archive_file"
+    echo "Old MAC Address: $og_mac" >> "$archive_file"
+    echo "New MAC Address: $new_mac" >> "$archive_file"
+}
 
 # Check that user gave a real MAC address
 mac_validation() {
     local mac=$1
         
+        # Uses regular expressions to match 6 pairs of hexadecimals within the acceptable range that are seperated with colons.
         if [[ ! $mac =~ ^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$ ]]; then
             echo "Please input a valid MAC address. Double check that the address is correct or try reformatting to this format: xx:xx:xx:xx:xx:xx"
             return 1
@@ -28,6 +43,7 @@ mac_validation() {
 interface_validation() {
     local interface=$1
 
+        # Essentially checks that the interface is up and running using ip link show.
         if ! ip link show "$interface" &>/dev/null; then
             echo "Please input a valid network interface. Double check your input and try again."
             echo "If you need help finding a valid interface try using ip link show."
@@ -41,6 +57,9 @@ interface_validation() {
 interface="$1"
 new_mac="$2"
 
+# Uses grep to pull out the original MAC address following the same regular expression search from the validation check.
+old_mac=$(ip link show "$interface" | grep -o -E '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}')
+
 # Interface validation
 if ! interface_validation "$interface"; then
     exit 1
@@ -50,6 +69,9 @@ fi
 if ! mac_validation "$new_mac"; then
     exit 1
 fi
+
+# Runs an archive entry before carrying out the change.
+archiving_mac "$interface" "$old_mac" "$new_mac"
 
 # Bringing the interface down + an error messeage if it fails
 if ! ip link set "$interface" down; then
@@ -72,7 +94,8 @@ if ! ip link set "$interface" up; then
     exit 1
 fi
 
+# Returns some validation for the user to tell them that the change process is completed.
 echo "Changed your MAC address ✧( ˶^ ᗜ ^˶ )"
-echo "Run ip link show to see the changes made."
+echo "Run ip link show to see the changes made (there might be a little bit of delay)."
 
 exit 0

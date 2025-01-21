@@ -23,4 +23,4 @@ I took a lot of my time to build in a few features that are really cool.
 
 - __Error Detection.__ Should there be any problems with either the inputs you provide or simply the process of changing the address, the code will give you a message telling you the error and or how to fix it.
 
-- __MAC Address Archive (wip).__ I know I said to write down your MAC address before changing and while I still encourage that, the script will also archive all of your MAC address prior to the change in a text file. This applies to all of the network interfaces avaliable. So should you forget where you wrote your old address, or if your dog eats it, it will always be stored in a text file in the directory.
+- __MAC Address Archive (wip).__ I know I said to write down your MAC address before changing and while I still encourage that, the script will also archive all of your MAC address prior to the change in a text file. This applies to all of the network interfaces avaliable. So should you forget where you wrote your old address, or if your dog eats it, it will always be stored in a text file in the directory called `archive.txt`.
