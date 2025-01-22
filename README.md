@@ -14,8 +14,9 @@ Actually changing your MAC address is as simple as running this string of comman
 
 1. `ip link show` This will show you all of the avaliable network interfaces, in case you didn't know, as well as your current MAC address. __It's important to note your current MAC address so you can easily change it back later!__
 
+2. `sudo ./changer.sh [interface] [MAC address]` This is where the magic happens. Simply type out the name of the interface as seen when you ran `ip link show` and then type (or paste) in the new MAC address you want. The code will do all of it's magic behind the scenes and will return a lovely message when it works! An address change request and a successful return message will look like this:
 
-2. `sudo ./changer.sh [interface] [MAC address]` This is where the magic happens. Simply type out the name of the interface as seen when you ran `ip link show` and then type (or paste) in the new MAC address you want. The code will do all of it's magic behind the scenes and will return a lovely message when it works!
+    ![title](screen_shots/example1.png)
 
 ## Features of the Changer
 
@@ -31,4 +32,6 @@ I took a lot of my time to build in a few features that are really cool.
 
 - __MAC Address Archive.__ I know I said to write down your MAC address before changing and while I still encourage that, the script will also archive all of your MAC address prior to the change in a text file. This applies to the specific network interface you are altering. So should you forget where you wrote your old address, or if your dog eats it, it will always be stored in a text file in the directory called `archive.txt`.
 
-    - __Enhanced MAC Address Archive.__ Because I'm really nice I enhanced the MAC archive with extra features. Should you ever somehow accidentally delete the `achive.txt` file, it'll just a new one for you. And why not have time stamped archive entries? What if you went to a cafe the other week and you don't remember what address you used? Well just look through the archive for the date.
+    - __Enhanced MAC Address Archive.__ Because I'm really nice I enhanced the MAC archive with extra features. Should you ever somehow accidentally delete the `achive.txt` file, it'll just a new one for you. And why not have time stamped archive entries? What if you went to a cafe the other week and you don't remember what address you used? Well just look through the archive for the date. After a few changes the MAC Archive will look like this:
+
+        ![title](screen_shots/example2.png)
