@@ -57,9 +57,6 @@ def main():
     if not subprocess.run(['ip', 'link', 'set', interface, 'address', mac]):
         print("Failed to change the MAC address.")
         subprocess.run(['ip', 'link', 'set', interface, 'up'])
-        
-        # If it happens to fail, it will be nice and try to bring the interface back up.
-        subprocess.run(['ip', 'link', 'set', interface, 'up'])
         exit(1)
 
     # Bringing the interface up + an error messeage if it fails
