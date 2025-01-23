@@ -1,10 +1,11 @@
-#!/bin/python
+#!/bin/python3
 
 import subprocess
 import re
 import sys
 
 # Do archiving if you hate yourself <3
+# print >>myfile, "thing" == echo "thing" >> myfile (i think... maybe...)
 
 # Check that user gave a real MAC address
 def mac_validation(mac):
