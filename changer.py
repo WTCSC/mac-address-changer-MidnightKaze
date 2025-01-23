@@ -1,3 +1,5 @@
+#!/bin/python
+
 import subprocess
 import re
 import sys
@@ -29,21 +31,30 @@ def main():
     # Interface is the argument in position 1
     interface = sys.argv[1]
 
-    # MAC is the argument in position 2 >>> use os.sys.argv?
+    # MAC is the argument in position 2 >>> use os.sys.argv? >>> legit don't know the difference
     mac = sys.argv[2]
 
     # Runs the validation checks
     if not mac_validation(mac):
-        return
+        exit(1)
     
     if not interface_validation(interface):
-        return
+        exit(1)
     
     if not subprocess.run(['ip', 'link', 'set', interface, 'down']):
         print("Failed to bring the interface down.")
-        return
+        exit(1)
     
     if not subprocess.run(['ip', 'link', 'set', interface, 'address', mac]):
         print("Failed to change the MAC address.")
         subprocess.run(['ip', 'link', 'set', interface, 'up'])
-        return
+        
+        subprocess.run(['ip', 'link', 'set', interface, 'up'])
+        exit(1)
+
+    print("Changed your MAC address ✧( ˶^ ᗜ ^˶ )")
+    print("Run ip link show to see the changes made (there might be a little bit of delay or lag).")
+    exit(0)
+
+if __name__=="__main__":
+    main()
