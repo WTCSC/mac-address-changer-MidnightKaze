@@ -1,1 +1,3 @@
-enpos3: 08:00:27:db:ac:26
+enp0s3: 08:00:27:db:ac:26
+
+valid change: 00:1b:63:84:45:e6
