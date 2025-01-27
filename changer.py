@@ -4,9 +4,6 @@ import subprocess
 import re
 import sys
 
-# Do archiving if you hate yourself <3
-# print >>myfile, "thing" == echo "thing" >> myfile (i think... maybe...)
-
 # Check that user gave a real MAC address
 def mac_validation(mac):
      # Sets the match pattern to 6 pairs of hexadecimals within the acceptable range that are seperated with colons.
@@ -38,7 +35,7 @@ def main():
     # Interface is the argument in position 1
     interface = sys.argv[1]
 
-    # MAC is the argument in position 2 >>> use os.sys.argv? >>> legit don't know the difference
+    # MAC is the argument in position 2
     mac = sys.argv[2]
 
     # Runs the validation for the MAC Address
