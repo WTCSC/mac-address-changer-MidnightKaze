@@ -40,33 +40,33 @@ def main():
 
     # Runs the validation for the MAC Address
     if not mac_validation(mac):
-        exit(1)
+        sys.exit(1)
     
     # Runs the validation for the interface
     if not interface_validation(interface):
-        exit(1)
+        sys.exit(1)
     
     # Bringing the interface down + an error messeage if it fails
     if not subprocess.run(['ip', 'link', 'set', interface, 'down']):
         print("Failed to bring the interface down.")
-        exit(1)
+        sys.exit(1)
     
     # Changing the MAC address + an error messeage if it fails
     if not subprocess.run(['ip', 'link', 'set', interface, 'address', mac]):
         print("Failed to change the MAC address.")
         subprocess.run(['ip', 'link', 'set', interface, 'up'])
-        exit(1)
+        sys.exit(1)
 
     # Bringing the interface up + an error messeage if it fails
     if not subprocess.run(['ip', 'link', 'set', interface, 'up']):
         print("Failed to bring the interface back up.")
-        exit(1)
+        sys.exit(1)
 
     # Returns some validation for the user to tell them that the change process is completed.
     print("Changed your MAC address ✧( ˶^ ᗜ ^˶ )")
     print("Run ip link show to see the changes made (there might be a little bit of delay or lag).")
     
-    exit(0)
+    sys.exit(0)
 
 if __name__=="__main__":
     main()
